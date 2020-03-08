@@ -1451,6 +1451,7 @@ foreach term : ['analyze',
                 'networkd',
                 'nss-myhostname',
                 'nss-systemd',
+                'oomd',
                 'portabled',
                 'pstore',
                 'quotacheck',
@@ -1671,6 +1672,7 @@ subdir('src/analyze')
 subdir('src/journal-remote')
 subdir('src/coredump')
 subdir('src/pstore')
+subdir('src/oom')
 subdir('src/hostname')
 subdir('src/import')
 subdir('src/partition')
@@ -3748,6 +3750,7 @@ foreach tuple : [
         ['DNS-over-TLS(openssl)', conf.get('DNS_OVER_TLS_USE_OPENSSL') == 1],
         ['coredump'],
         ['pstore'],
+        ['oomd'],
         ['polkit'],
         ['legacy pkla',      install_polkit_pkla],
         ['efi'],
