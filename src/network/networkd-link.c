@@ -7,6 +7,7 @@
 #include <unistd.h>
 
 #include "alloc-util.h"
+#include "batadv.h"
 #include "bond.h"
 #include "bridge.h"
 #include "bus-util.h"
