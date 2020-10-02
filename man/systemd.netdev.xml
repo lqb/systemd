@@ -185,6 +185,9 @@
 
           <row><entry><varname>bareudp</varname></entry>
           <entry> Bare UDP tunnels provide a generic L3 encapsulation support for tunnelling different L3 protocols like MPLS, IP etc. inside of an UDP tunnel.</entry></row>
+
+          <row><entry><varname>batadv</varname></entry>
+          <entry> (<ulink url="https://www.open-mesh.org/projects/open-mesh/wiki">B.A.T.M.A.N. Advanced</ulink>) is a routing protocol for multi-hop mobile ad hoc networks which operates on layer2.</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -1970,6 +1973,96 @@
         <term><varname>Table=</varname></term>
         <listitem>
           <para>The numeric routing table identifier. This setting is compulsory.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+
+  <refsect1>
+    <title>[BatmanAdvanced] Section Options</title>
+    <para>The [BatmanAdvanced] section only applies for
+    netdevs of kind <literal>batadv</literal> and accepts the
+    following keys:</para>
+
+    <variablelist class='network-directives'>
+      <varlistentry>
+        <term><varname>GatewayMode=</varname></term>
+        <listitem>
+          <para>The GatewayMode is a string of either <literal>off</literal>, <literal>server</literal> or
+          <literal>client</literal>. A batman-adv node can either run in server mode (sharing its internet
+          connection with the mesh) or in client mode (searching for the most suitable internet connection
+          in the mesh) or having the gateway support turned off entirely (which is the default setting).
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><varname>Aggregation=</varname></term>
+        <listitem>
+          <para>Takes a boolean value. Enables or disables aggregation of originator messages. Defaults to
+           true.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><varname>BridgeLoopAvoidance=</varname></term>
+        <listitem>
+          <para>Takes a boolean value. Enables or disables avoidance of loops on bridges. Defaults to true.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><varname>DistributedArpTable=</varname></term>
+        <listitem>
+          <para>Takes a boolean value. Enables or disables the distributed arp table. Defaults to true.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><varname>Fragmentation=</varname></term>
+        <listitem>
+          <para>Takes a boolean value. Enables or disables fragmentation. Defaults to true.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><varname>HopPenalty=</varname></term>
+        <listitem>
+          <para>The hop penalty setting allows to modify
+          <citerefentry><refentrytitle>batctl</refentrytitle><manvolnum>8</manvolnum></citerefentry>
+          preference for multihop routes vs. short routes. The value is applied to the TQ of each forwarded
+          OGM, thereby propagating the cost of an extra hop (the packet has to be received and retransmitted
+          which costs airtime). A higher hop penalty will make it more unlikely that other nodes
+          will choose this node as intermediate hop towards any given destination.
+          The default hop penalty of '15' is a reasonable value for most setups and probably does not need
+          to be changed. However, mobile nodes could choose a value of 255 (maximum value) to avoid being
+          chosen as a router by other nodes.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><varname>OriginatorIntervalSec=</varname></term>
+        <listitem>
+          <para>The value specifies the interval in seconds/miliseconds (ms) in which batman-adv floods the
+          network with its protocol information. See <citerefentry><refentrytitle>systemd-timed</refentrytitle>
+          <manvolnum>7</manvolnum></citerefentry> for more information.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><varname>GatewayBandwidthDown=</varname></term>
+        <listitem>
+          <para>If the node is a server, this
+          parameter is used to inform other nodes in the network about
+          this node's internet connection bandwidth. Just enter any number
+          suffixed with K, M, G or T and the batman-adv
+          module will propagate the entered value in the mesh.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><varname>GatewayBandwidthUp=</varname></term>
+        <listitem>
+          <para>If the node is a server, this
+          parameter is used to inform other nodes in the network about
+          this node's internet connection bandwidth. Just enter any number
+          suffixed with K, M, G or T and the batman-adv
+          module will propagate the entered value in the mesh.</para>
         </listitem>
       </varlistentry>
     </variablelist>
