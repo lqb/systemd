@@ -1397,7 +1397,7 @@ static int dump_list(Table *table, const char *prefix, char * const *l) {
 
         r = table_add_many(table,
                            TABLE_STRING, prefix,
-                           TABLE_STRV, l);
+                           TABLE_STRV_WRAPPED, l);
         if (r < 0)
                 return table_log_add_error(r);
 
